@@ -1,0 +1,17 @@
+body {
+    padding: 0px;
+    margin: 0px;
+}
+#app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    >#container{
+        display: flex;
+        flex-direction: column;
+        >#inputs{
+            display: flex;
+        }
+    }
+}
