@@ -4,6 +4,14 @@ const conversionDetails = {
   decimal: ['10', '2', '8', '16'],
   hexadecimal: ['16', '2', '8', '10'],
 };
+const hexToDecimal = {
+  A: 10,
+  B: 11,
+  C: 12,
+  D: 13,
+  E: 14,
+  F: 15,
+}
 let currentNumberSystem = "binary";
 
 const numberSystemSelector = document.querySelector("#number-system");
@@ -68,6 +76,38 @@ function decimalToAny(decimalNumber) {
     result[key] = getRemainders(decimalNumber, key).toReversed();
   }
   return result;
+}
+
+function binaryToDecimal(binaryNumber) {
+  let value = 0;
+  `${binaryNumber}`.split("").toReversed().forEach((e, index) => {
+    let digit = parseInt(e, 10);
+    if (digit === 1) {
+      value += (digit * (2 ** index));
+    }
+  });
+  return value;
+}
+function octalToDecimal(octalNumber) {
+  let value = 0;
+  `${octalNumber}`.split("").toReversed().forEach((e, index) => {
+    let digit = parseInt(e, 10);
+    value += (digit * (8 ** index));
+  });
+  return value;
+}
+function hexadecimalToDecimal(hexadecimalNumber) {
+  let value = 0;
+  `${hexadecimalNumber}`.split("").toReversed().forEach((e, index) => {
+    if (Object.hasOwn(hexToDecimal, e.toUpperCase())) {
+      value += (hexToDecimal[e.toUpperCase()] * (16 ** index));
+    }
+    else {
+      let digit = parseInt(e, 10);
+      value += (digit * (16 ** index));
+    }
+  });
+  return value;
 }
 
 function getRemainders(dividend, divisor) {
