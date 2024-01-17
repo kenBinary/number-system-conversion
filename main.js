@@ -1,23 +1,18 @@
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+const conversionDetails = {
+  binary: ['2', '8', '10', '16'],
+  octal: ['8', '2', '10', '16'],
+  decimal: ['10', '2', '8', '16'],
+  hexadecimal: ['16', '2', '8', '10'],
+};
 
-// document.querySelector('#app').innerHTML = `
-//   <div>
-//     <a href="https://vitejs.dev" target="_blank">
-//       <img src="${viteLogo}" class="logo" alt="Vite logo" />
-//     </a>
-//     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-//       <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-//     </a>
-//     <h1>Hello Vite!</h1>
-//     <div class="card">
-//       <button id="counter" type="button"></button>
-//     </div>
-//     <p class="read-the-docs">
-//       Click on the Vite logo to learn more
-//     </p>
-//   </div>
-// `
+const numberSystemSelector = document.querySelector("#number-system");
+numberSystemSelector.addEventListener('change', (e) => {
+  changeNumberSystem(e.target.value);
+});
 
-setupCounter(document.querySelector('#counter'))
+function changeNumberSystem(numberSystem) {
+  const inputContainers = document.querySelectorAll(".input-container");
+  Array.from(inputContainers).forEach((element, index) => {
+    element.setAttribute("data-baseNumber", conversionDetails[numberSystem][index]);
+  });
+}

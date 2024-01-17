@@ -6,31 +6,36 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite App</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
   <div id="app">
     <div id="container">
       <div id="inputs">
-        <input type="text">
+        <div class="input-container" data-baseNumber="2">
+          <input type="text" class="value-input">
+        </div>
         <p>=</p>
-        <input type="text">
-        <input type="text">
-        <input type="text">
+        <div class="input-container" data-baseNumber="8">
+          <input type="text" class="value-input" readonly>
+        </div>
+        <div class="input-container" data-baseNumber="10">
+          <input type="text" class="value-input" readonly>
+        </div>
+        <div class="input-container" data-baseNumber="16">
+          <input type="text" class="value-input" readonly>
+        </div>
       </div>
-      <select name="" id="">
-        <option value="test">binary</option>
-        <option value="test">octal</option>
-        <option value="test">decimal</option>
-        <option value="test">hexadecimal</option>
-        <option value="test">hexadecimal</option>
-        <option value="test">hexadecimal</option>
-        <option value="test">hexadecimal</option>
+      <select name="number-system" id="number-system">
+        <option value="binary">binary</option>
+        <option value="octal">octal</option>
+        <option value="decimal">decimal</option>
+        <option value="hexadecimal">hexadecimal</option>
       </select>
     </div>
   </div>
-  <script type="module" src="/main.js"></script>
+  <script type="module" src="./main.js"></script>
 </body>
 
 </html>

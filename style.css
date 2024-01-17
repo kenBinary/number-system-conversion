@@ -3,6 +3,10 @@ body {
   margin: 0px;
 }
 
+* {
+  box-sizing: border-box !important;
+}
+
 #app {
   display: flex;
   justify-content: center;
@@ -12,9 +16,21 @@ body {
 #app > #container {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 #app > #container > #inputs {
+  gap: 1rem;
   display: flex;
+}
+#app > #container > #inputs > div {
+  position: relative;
+}
+#app > #container > #inputs > div::after {
+  position: absolute;
+  content: attr(data-baseNumber);
+  font-size: 1.3rem;
+  top: 20px;
+  right: -15px;
 }
 
 /*# sourceMappingURL=style.css.map */

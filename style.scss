@@ -2,16 +2,33 @@ body {
     padding: 0px;
     margin: 0px;
 }
+* {
+    box-sizing: border-box !important;
+}
 #app {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100dvh;
-    >#container{
+    > #container {
         display: flex;
         flex-direction: column;
-        >#inputs{
+        gap: 1rem;
+        > #inputs {
+            gap: 1rem;
             display: flex;
+            > div {
+                position: relative;
+                > .value-input {
+                }
+                &::after {
+                    position: absolute;
+                    content: attr(data-baseNumber);
+                    font-size: 1.3rem;
+                    top: 20px;
+                    right: -15px;
+                }
+            }
         }
     }
 }
