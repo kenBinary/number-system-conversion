@@ -12,6 +12,14 @@ const hexToDecimal = {
   E: 14,
   F: 15,
 }
+const decimalToHex = {
+  10: 'A',
+  11: 'B',
+  12: 'C',
+  13: 'D',
+  14: 'E',
+  15: 'F',
+}
 let currentNumberSystem = "binary";
 
 const numberSystemSelector = document.querySelector("#number-system");
@@ -22,8 +30,15 @@ numberSystemSelector.addEventListener('change', (e) => {
 
 const userValue = document.querySelector("#user-value");
 userValue.addEventListener('input', (e) => {
-  populateInputs(decimalToAny(e.target.value));
+  if (currentNumberSystem !== "decimal") {
+    populateInputs(BinOctHexToDecimal(e.target.value, currentNumberSystem));
+  }
+  else {
+    populateInputs(decimalToBinOctHex(e.target.value));
+  }
 });
+
+
 function changeNumberSystem(numberSystem) {
   const inputContainers = document.querySelectorAll(".input-container");
   Array.from(inputContainers).forEach((element, index) => {
@@ -60,23 +75,13 @@ function populateInputs(convertedNumbers) {
 function convertInputValue(value, numberSystem) {
   switch (numberSystem) {
     case "decimal":
-      return decimalToAny(value);
+      return decimalToBinOctHex(value);
     default:
       break;
   }
 }
 
-function decimalToAny(decimalNumber) {
-  let result = {
-    2: [],
-    8: [],
-    16: [],
-  }
-  for (const key in result) {
-    result[key] = getRemainders(decimalNumber, key).toReversed();
-  }
-  return result;
-}
+
 
 function binaryToDecimal(binaryNumber) {
   let value = 0;
@@ -108,6 +113,66 @@ function hexadecimalToDecimal(hexadecimalNumber) {
     }
   });
   return value;
+}
+
+
+function decimalToBinOctHex(decimalNumber) {
+  let result = {
+    2: [],
+    8: [],
+    16: [],
+  }
+  for (const key in result) {
+    if (key === '16') {
+      result[key] = getRemainders(decimalNumber, key).toReversed().map((e) => {
+        if (e > 9) {
+          return decimalToHex[`${e}`];
+        } else {
+          return e;
+        }
+      })
+    }
+    else {
+      result[key] = getRemainders(decimalNumber, key).toReversed();
+    }
+  }
+  return result;
+}
+
+function BinOctHexToDecimal(inputNumber, numberSystem) {
+  let result = {
+    2: [],
+    8: [],
+    10: [],
+    16: [],
+  }
+  let decimalNumber = 0;
+  switch (numberSystem) {
+    case "binary":
+      decimalNumber = binaryToDecimal(inputNumber);
+      result = {
+        2: [],
+        10: decimalNumber.toString().split(''),
+        ...decimalToBinOctHex(decimalNumber),
+      }
+      return result;
+    case "octal":
+      decimalNumber = octalToDecimal(inputNumber);
+      result = {
+        8: [],
+        10: decimalNumber.toString().split(''),
+        ...decimalToBinOctHex(decimalNumber),
+      }
+      return result;
+    case "hexadecimal":
+      decimalNumber = hexadecimalToDecimal(inputNumber);
+      result = {
+        16: [],
+        10: decimalNumber.toString().split(''),
+        ...decimalToBinOctHex(decimalNumber),
+      }
+      return result;
+  }
 }
 
 function getRemainders(dividend, divisor) {

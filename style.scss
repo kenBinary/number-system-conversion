@@ -15,18 +15,15 @@ body {
         flex-direction: column;
         gap: 1rem;
         > #inputs {
-            gap: 1rem;
+            gap: 2rem;
             display: flex;
             > div {
                 position: relative;
-                > .value-input {
-                }
                 &::after {
                     position: absolute;
                     content: attr(data-baseNumber);
                     font-size: 1.3rem;
                     top: 20px;
-                    right: -15px;
                 }
             }
         }

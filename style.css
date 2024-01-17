@@ -19,7 +19,7 @@ body {
   gap: 1rem;
 }
 #app > #container > #inputs {
-  gap: 1rem;
+  gap: 2rem;
   display: flex;
 }
 #app > #container > #inputs > div {
@@ -30,7 +30,6 @@ body {
   content: attr(data-baseNumber);
   font-size: 1.3rem;
   top: 20px;
-  right: -15px;
 }
 
 /*# sourceMappingURL=style.css.map */
